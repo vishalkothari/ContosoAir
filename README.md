@@ -1,5 +1,4 @@
-
-
+[![Build Status](https://vikothar.visualstudio.com/ContosoAir/_apis/build/status/vishalkothari.ContosoAir?branchName=master)](https://vikothar.visualstudio.com/ContosoAir/_build/latest?definitionId=10&branchName=master)
 
 # Microsoft.Github CI Demo
 
