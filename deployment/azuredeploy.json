@@ -3,6 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"p_environment": {
+			"defaultValue": "v212",
 			"type": "string"
 		},
 		"p_separator": {
@@ -49,6 +50,27 @@
 			"dependsOn": []
 		},
 		{
+            "type": "Microsoft.Web/serverfarms",
+			"apiVersion": "2018-02-01",
+            "name": "[concat (variables('site_web_name'),'_plan')]",
+            "location": "[resourceGroup().location]",
+            "kind": "linux",
+            "tags": {},
+            "dependsOn": [],
+            "properties": {
+                "name": "[concat (variables('site_web_name'),'_plan')]",
+                "workerSize": "0",
+                "workerSizeId": "0",
+                "numberOfWorkers": "1",
+                "reserved": true,
+                "hostingEnvironment": ""
+            },
+            "sku": {
+                "Tier": "Basic",
+                "Name": "B1"
+            }
+        },
+		{
 			"type": "Microsoft.Web/sites",
 			"kind": "app",
 			"name": "[variables('site_web_name')]",
@@ -75,7 +97,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat('Microsoft.DocumentDB/databaseAccounts/', variables('comosdb_default_name'))]"
+				"[concat('Microsoft.DocumentDB/databaseAccounts/', variables('comosdb_default_name'))]",
+				"[concat('Microsoft.Web/serverfarms/', variables('site_web_name'),'_plan')]"
 			]
 		}
 	],
